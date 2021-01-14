@@ -49,7 +49,7 @@ public class StudentDetails {
     }
     
     
-    public Student findStudentFromTextFile(String studentId) throws IOException{
+    public Student findStudentFromTextFile(String studentName) throws IOException{
         
         Student student = null;
         
@@ -60,15 +60,15 @@ public class StudentDetails {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
             
             String readLine;
-            
+             
             while ((readLine = bufferedReader.readLine()) != null) {
                 String[] detailsStudent = readLine.split(",");
                 
-                if (studentId.equals(detailsStudent[1]) ) {
+                if (studentName.equals(detailsStudent[0]) ) {
                     student = new Student();
                     
-                    student.setStudentID(detailsStudent[1]);
                     student.setStudentName(detailsStudent[0]);
+                    student.setStudentID(detailsStudent[1]);
                     student.setDob(detailsStudent[2]);
                     student.setAddress(detailsStudent[3]);
                     student.setDoa(detailsStudent[4]);

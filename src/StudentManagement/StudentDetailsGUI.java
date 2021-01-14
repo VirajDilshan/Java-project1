@@ -57,7 +57,7 @@ public class StudentDetailsGUI extends javax.swing.JFrame {
         btnSelectDateDOB = new javax.swing.JToggleButton();
         btnSelectDateDOA = new javax.swing.JToggleButton();
         btnAddStudentToTextFile = new javax.swing.JToggleButton();
-        btnSearchStudentFromText = new javax.swing.JToggleButton();
+        btnSearchStudentText = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -208,19 +208,17 @@ public class StudentDetailsGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnAddStudentToTextFile.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnAddStudentToTextFile.setText("Add Student to text file");
+        btnAddStudentToTextFile.setText("Add student to text file");
         btnAddStudentToTextFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddStudentToTextFileActionPerformed(evt);
             }
         });
 
-        btnSearchStudentFromText.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnSearchStudentFromText.setText("Search Student from text");
-        btnSearchStudentFromText.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchStudentText.setText("Search student from text");
+        btnSearchStudentText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchStudentFromTextActionPerformed(evt);
+                btnSearchStudentTextActionPerformed(evt);
             }
         });
 
@@ -235,17 +233,13 @@ public class StudentDetailsGUI extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(btnAddStudentToTextFile)
+                        .addGap(54, 54, 54)
+                        .addComponent(btnSearchStudentText)))
                 .addContainerGap(61, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnAddStudentToTextFile)
-                .addGap(174, 174, 174))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(btnSearchStudentFromText)
-                    .addContainerGap(414, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,14 +248,11 @@ public class StudentDetailsGUI extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAddStudentToTextFile, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(483, Short.MAX_VALUE)
-                    .addComponent(btnSearchStudentFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(17, 17, 17)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddStudentToTextFile)
+                    .addComponent(btnSearchStudentText))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -291,7 +282,6 @@ public class StudentDetailsGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSelectDateDOAActionPerformed
 
     private void btnAddStudentToTextFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentToTextFileActionPerformed
-        // TODO add your handling code here:
         String studentName = txtStudentName.getText();
         String studentID = txtStudentID.getText();
         String dob = txtDateofBirth.getText();
@@ -300,30 +290,30 @@ public class StudentDetailsGUI extends javax.swing.JFrame {
         String faculty = cmbFaculty.getSelectedItem().toString();
         String contactNumber = txtContactNumber.getText();
         String email = txtEmail.getText();
-        
-        
+
         Student student = new Student(studentName, studentID, dob, address, doa, faculty, contactNumber, email);
         StudentDetails studentDetails = new StudentDetails();
-        
+
         studentDetails.addStudentToTextFile(student);
-        
+
     }//GEN-LAST:event_btnAddStudentToTextFileActionPerformed
 
-    private void btnSearchStudentFromTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchStudentFromTextActionPerformed
+    private void btnSearchStudentTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchStudentTextActionPerformed
+            
         try {
-            // TODO add your handling code here:
-            String studentId = txtStudentID.getText();
-            
+         
+            String studentName = txtStudentName.getText();
+
             StudentDetails studentDetails = new StudentDetails();
-            
-            Student student = studentDetails.findStudentFromTextFile(studentId);
-            
-            txtStudentID.setText(student.getStudentID());
+
+            Student student = studentDetails.findStudentFromTextFile(studentName);
+
             txtStudentName.setText(student.getStudentName());
+            txtStudentID.setText(student.getStudentID());
             txtDateofBirth.setText(student.getDob());
             txtAddress.setText(student.getAddress());
             txtDateofAdmission.setText(student.getDoa());
-                 
+
             if(student.getFaculty().equals("Science")){
                 cmbFaculty.setSelectedIndex(2);
             }
@@ -340,8 +330,7 @@ public class StudentDetailsGUI extends javax.swing.JFrame {
                 cmbFaculty.setSelectedIndex(6);
             }
             else if(student.getFaculty().equals("Vetenary")){
-                cmbFaculty.setSelectedIndex(7);
-            }
+                          }
             else if(student.getFaculty().equals("Dental")){
                 cmbFaculty.setSelectedIndex(8);
             }
@@ -351,18 +340,16 @@ public class StudentDetailsGUI extends javax.swing.JFrame {
             else if(student.getFaculty().equals("Allied Health Science")){
                 cmbFaculty.setSelectedIndex(10);
             }
-                    
-        
+
             txtContactNumber.setText(student.getContactNumber());
             txtEmail.setText(student.getEmail());
-            
-            
+
         } catch (IOException ex) {
             Logger.getLogger(StudentDetailsGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-    }//GEN-LAST:event_btnSearchStudentFromTextActionPerformed
+        } cmbFaculty.setSelectedIndex(7);
+ 
+
+    }//GEN-LAST:event_btnSearchStudentTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -401,7 +388,7 @@ public class StudentDetailsGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAddStudentToTextFile;
-    private javax.swing.JToggleButton btnSearchStudentFromText;
+    private javax.swing.JToggleButton btnSearchStudentText;
     private javax.swing.JToggleButton btnSelectDateDOA;
     private javax.swing.JToggleButton btnSelectDateDOB;
     private javax.swing.JComboBox<String> cmbFaculty;
